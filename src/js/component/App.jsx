@@ -52,12 +52,18 @@ const App  = () => {
         try
        {
            const response= await fetch ('https://assets.breatheco.de/apis/fake/todos/user/ynava');
-           const body = await response.json();
-           setList (body);
-           setClearList(false);
-        } catch (error){
-        console.log("Error: ", error);}
-       }
+
+           if (response.status == 200) {
+                const body = await response.json();
+                setList (body);
+                setClearList(false);}
+           else {
+            await createToDoList();
+            await getToDoList();} 
+        }catch (error){
+            console.log("Error: ", error);}
+        }
+            
  
    const updateToDoList = async(event)=>
    {
@@ -124,7 +130,7 @@ const App  = () => {
     };
 
     useEffect(()=>{        
-        createToDoList ();
+        getToDoList ();
         }, []);
         
     return (
@@ -136,7 +142,7 @@ const App  = () => {
                 value={inputValue}
                 placeholder="What needs to be done?">
             </input>
-            {list.length == 0 ? 
+            {(list.length == 0 || list.length == 1 ) ? 
                 <ul className="edit">No tasks, add a task:</ul> 
                 :
                 <ul className="edit">
@@ -154,8 +160,8 @@ const App  = () => {
                     })}
                 </ul>
             }
-            <div className="footer">
-            {(list.length == 0 || list.length == 1 ) ? <p>0 tasks added</p>  
+            <div className="footer p-1 mt-1">
+            {(list.length == 0 || list.length == 1 ) ? <p> 0 tasks added</p>  
                 : <p> {list.length-1} tasks added </p>}
             </div>
             

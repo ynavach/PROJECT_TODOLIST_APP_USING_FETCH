@@ -94,21 +94,30 @@ li{
     align-items: center;
     justify-content: space-between;
 }
+
+/*li{
+	opacity: 1;
+}*/
 	
+li:hover >button>i{
+	opacity: 1;
+}
 span{
     padding-left: 20px !important;
 }
 
 .clasei{
 	color: red;
+	opacity: 0;
 	/*visibility: hidden;*/
 }
 
 .clasei:hover{
 	color: green; 
-	/*visibility: visible !important;*/
+/*	visibility: visible !important;*/
 }
- 
+
+
 .footer {
 	color: #777;
 	padding: 10px 15px;
